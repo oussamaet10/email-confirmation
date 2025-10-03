@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Confirmed</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background slider */
+        .background-slider {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .background-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .background-slide.active {
+            opacity: 1;
+        }
+
+        .background-slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Content container */
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 60px 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            width: 180px;
+            height: auto;
+            margin: 0 auto 30px;
+            display: block;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .checkmark-circle {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: scaleIn 0.5s ease-out 0.2s both;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .checkmark {
+            width: 100px;
+            height: 100px;
+            animation: checkmark 0.4s ease-out 0.4s both;
+        }
+
+        @keyframes checkmark {
+            from {
+                opacity: 0;
+                transform: scale(0);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 32px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        p {
+            color: #4a5568;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .return-message {
+            color: #f97316;
+            font-size: 15px;
+            font-weight: 600;
+            margin-top: 10px;
+            animation: fadeIn 0.8s ease-out 0.6s both;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 40px 25px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            p {
+                font-size: 15px;
+            }
+
+            .logo {
+                width: 140px;
+            }
+
+            .checkmark-circle {
+                width: 80px;
+                height: 80px;
+            }
+
+            .checkmark {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slider -->
+    <div class="background-slider">
+        <div class="background-slide active" style="background-image: url('moovup_image_dashboard.png');"></div>
+        <div class="background-slide" style="background-image: url('evolve_dashboard_image.png');"></div>
+        <div class="background-slide" style="background-image: url('power_gym_male.png');"></div>
+        <div class="background-slide" style="background-image: url('anais_dashboard_image.png');"></div>
+        <div class="background-slide" style="background-image: url('lady_moovup_image.png');"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <div class="container">
+            <img src="moov_up.png" alt="Club Moov'UP Fitness" class="logo">
+            <div class="checkmark-circle">
+                <img src="check.svg" alt="Success" class="checkmark">
+            </div>
+            <h1>Email Confirmed!</h1>
+            <p>Your email address has been successfully verified. You can now access all features of your account.</p>
+            <p class="return-message">Please return to the app to continue</p>
+        </div>
+    </div>
+
+    <script>
+        // Background slider
+        const slides = document.querySelectorAll('.background-slide');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Change slide every 4 seconds
+        setInterval(nextSlide, 4000);
+    </script>
+</body>
+</html>
